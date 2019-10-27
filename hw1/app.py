@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, uic
+from PyQt5.QtWidgets import QAction
 import os
 import sys
 from functools import partial
@@ -11,6 +12,12 @@ class MainUi(QtWidgets.QMainWindow):
         ui_path = os.getcwd() + os.sep + "ui" + os.sep + "hw1.ui"
         uic.loadUi(ui_path, self)
         self.bind_buttons()
+
+        menubar = self.menuBar()
+        close_all = QAction('Close all CV windows', self)
+        close_all.triggered.connect(Problem1.close_all)
+        menubar.addAction(close_all)
+
         self.show()
 
     def bind_buttons(self):
