@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QAction
 import os
 import sys
 from functools import partial
+import signal
 
 from problems import problem1
 
@@ -31,6 +32,7 @@ class MainUi(QtWidgets.QMainWindow):
             self.findChild(QtWidgets.QPushButton, object_name).clicked.connect(partial(bind_function, self))
 
 if __name__ == '__main__':
+    signal.signal(signal.SIGINT, signal.SIG_DFL) # Trap the Ctrl-C and terminate
     app = QtWidgets.QApplication(sys.argv)
     window = MainUi()
     sys.exit(app.exec_())
