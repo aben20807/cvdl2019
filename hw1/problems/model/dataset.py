@@ -4,18 +4,20 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
 
+from . import hyperparam
+
 class Dataset(object):
-    def __init__(self):
+    def __init__(self, hyperparam):
         self.transform = transforms.Compose(
             [transforms.ToTensor(),
             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
         self.trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                                 download=True, transform=self.transform)
-        self.trainloader = torch.utils.data.DataLoader(self.trainset, batch_size=32,
+        self.trainloader = torch.utils.data.DataLoader(self.trainset, batch_size=hyperparam.batch_size,
                                                 shuffle=True, num_workers=2)
         self.testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                             download=True, transform=self.transform)
-        self.testloader = torch.utils.data.DataLoader(self.testset, batch_size=32,
+        self.testloader = torch.utils.data.DataLoader(self.testset, batch_size=hyperparam.batch_size,
                                                 shuffle=False, num_workers=2)
         self.classes = ('plane', 'car', 'bird', 'cat',
                         'deer', 'dog', 'frog', 'horse',

@@ -7,6 +7,7 @@ import signal
 
 from problems import problem1
 from problems import problem2
+from problems import problem5
 
 class MainUi(QtWidgets.QMainWindow):
     def __init__(self):
@@ -30,6 +31,7 @@ class MainUi(QtWidgets.QMainWindow):
             'b1_4': problem1.p1_4,
             'b2_1': problem2.p2_1,
             'b5_1': problem5.p5_1,
+            'b5_2': problem5.p5_2,
         }
         for object_name, bind_function in bind_dict.items():
             self.findChild(QtWidgets.QPushButton, object_name).clicked.connect(partial(bind_function, self))
