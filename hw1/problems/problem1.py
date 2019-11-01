@@ -1,8 +1,7 @@
 import cv2
 import os
-import numpy as np
 
-def close_all():
+def close_all_cv():
         cv2.destroyAllWindows()
 
 def p1_1(ui):

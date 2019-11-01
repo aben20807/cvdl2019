@@ -7,17 +7,17 @@ import numpy as np
 from . import hyperparam
 
 class Dataset(object):
-    def __init__(self, hyperparam):
+    def __init__(self, batch_size):
         self.transform = transforms.Compose(
             [transforms.ToTensor(),
             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
         self.trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                                 download=True, transform=self.transform)
-        self.trainloader = torch.utils.data.DataLoader(self.trainset, batch_size=hyperparam.batch_size,
+        self.trainloader = torch.utils.data.DataLoader(self.trainset, batch_size=batch_size,
                                                 shuffle=True, num_workers=2)
         self.testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                             download=True, transform=self.transform)
-        self.testloader = torch.utils.data.DataLoader(self.testset, batch_size=hyperparam.batch_size,
+        self.testloader = torch.utils.data.DataLoader(self.testset, batch_size=batch_size,
                                                 shuffle=False, num_workers=2)
         self.classes = ('plane', 'car', 'bird', 'cat',
                         'deer', 'dog', 'frog', 'horse',
@@ -26,6 +26,7 @@ class Dataset(object):
     def image_show(self, img):
         img = img / 2 + 0.5     # unnormalize
         plt.ion()
+        plt.figure()
         plt.imshow(np.transpose(img.numpy(), (1, 2, 0)))
         plt.axis('off')
         plt.show()
@@ -38,3 +39,6 @@ class Dataset(object):
         print("Label: " + '\t'.join('%s' % self.classes[labels[j]] for j in range(10)))
         # show images
         self.image_show(torchvision.utils.make_grid(images[:10], nrow=10))
+
+    def get_test(self, idx):
+        return self.testset[idx]

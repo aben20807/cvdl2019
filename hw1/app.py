@@ -17,9 +17,12 @@ class MainUi(QtWidgets.QMainWindow):
         self._bind_buttons()
 
         menubar = self.menuBar()
-        close_all = QAction('Close all CV windows', self)
-        close_all.triggered.connect(problem1.close_all)
-        menubar.addAction(close_all)
+        close_all_cv = QAction('Close all CV windows', self)
+        close_all_cv.triggered.connect(problem1.close_all_cv)
+        close_all_plt = QAction('Close all PLT windows', self)
+        close_all_plt.triggered.connect(problem5.close_all_plt)
+        menubar.addAction(close_all_cv)
+        menubar.addAction(close_all_plt)
 
         self.show()
 
@@ -32,6 +35,9 @@ class MainUi(QtWidgets.QMainWindow):
             'b2_1': problem2.p2_1,
             'b5_1': problem5.p5_1,
             'b5_2': problem5.p5_2,
+            'b5_3': problem5.p5_3,
+            'b5_4': problem5.p5_4,
+            'b5_5': problem5.p5_5,
         }
         for object_name, bind_function in bind_dict.items():
             self.findChild(QtWidgets.QPushButton, object_name).clicked.connect(partial(bind_function, self))
