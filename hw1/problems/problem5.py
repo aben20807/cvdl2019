@@ -1,7 +1,9 @@
+import torch.optim as optim
 from .model import lenet, dataset, hyperparam
 
-hp = hyperparam.Hyperparam(batch_size=32,learning_rate=0.001,optimizer='SGD')
+hp = hyperparam.Hyperparam(batch_size=32,learning_rate=0.001,optimizer=optim.SGD)
 ds = dataset.Dataset(hp);
+net = lenet.LeNet()
 
 def p5_1(ui):
     ds.show_10_images_and_images()

@@ -8,4 +8,4 @@ class Hyperparam(object):
         return "hyperparameters:\n" + \
             "batch_size: " + str(self.batch_size) + '\n' \
             "learning_rate: " + str(self.learning_rate) + '\n' \
-            "optimizer: " + str(self.optimizer)
+            "optimizer: " + str(self.optimizer.__name__)
