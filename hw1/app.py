@@ -7,6 +7,7 @@ import signal
 
 from problems import problem1
 from problems import problem2
+from problems import problem3
 from problems import problem5
 
 class MainUi(QtWidgets.QMainWindow):
@@ -33,6 +34,7 @@ class MainUi(QtWidgets.QMainWindow):
             'b1_3': problem1.p1_3,
             'b1_4': problem1.p1_4,
             'b2_1': problem2.p2_1,
+            'b3_1': problem3.p3_1,
             'b5_1': problem5.p5_1,
             'b5_2': problem5.p5_2,
             'b5_3': problem5.p5_3,
