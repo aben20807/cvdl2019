@@ -70,8 +70,14 @@ def p1_3(ui):
 
         # Combine the rotation matrix and the translation vector
         extrinsic_mtx = np.c_[rmtx, tvecs]
+        print(str(index) + ".bmp")
         print(extrinsic_mtx)
 
 def p1_4(ui):
-    print("ouo")
-    ui.t3_1_angle.setText("OuO")
+    for i in range(1, 16):
+        filename = img_dir + str(i) + ".bmp"
+        ret = calibrateCameraFromChessboard(filename)
+        if ret['patternWasFound'] == True:
+            np.set_printoptions(formatter={'float': '{:.6f}'.format})
+            print(str(i) + ".bmp")
+            print(ret['distCoeffs'][0])
