@@ -3,11 +3,11 @@ import cv2
 import numpy as np
 
 def isfloat(value):
-  try:
-    float(value)
-    return True
-  except ValueError:
-    return False
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
 
 def p3_1(ui):
     # Get the index from the GUI

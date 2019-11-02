@@ -35,6 +35,7 @@ def p5_4(ui):
         plt.ion()
         plt.figure()
         plt.imshow(mpimg.imread(pretrained_png_path))
+        plt.axis('off')
         plt.show()
     else:
         learn_loss = tr.train(num_epochs=50, sample_rate='epoch', save_model=True)
@@ -49,6 +50,7 @@ def p5_4(ui):
         plt.plot(learn_loss)
         plt.ylabel('loss')
         plt.xlabel('epoch')
+        plt.axis('off')
         plt.show()
         plt.savefig(pretrained_png_path)
 
