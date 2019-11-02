@@ -1,7 +1,6 @@
 import os
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 def isfloat(value):
   try:
@@ -31,11 +30,5 @@ def p3_1(ui):
     M = np.float32([[1,0,tx],[0,1,ty]])
     new_img = cv2.warpAffine(new_img, M, (width,height))
 
-    plt.ion()
-    plt.figure()
-    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    plt.axis('off')
-    plt.figure()
-    plt.imshow(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
-    plt.axis('off')
-    plt.show()
+    cv2.imshow("before", img)
+    cv2.imshow("after", new_img)
