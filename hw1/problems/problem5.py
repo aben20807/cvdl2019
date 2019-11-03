@@ -21,10 +21,12 @@ def p5_2(ui):
     print(tr.hyperparam)
 
 def p5_3(ui):
-    learn_loss = tr.train(num_epochs=1, sample_rate='iteration')
+    init_net = LeNet()
+    init_tr = Train(init_net)
+    _, train_loss = init_tr.train(num_epochs=1, sample_rate='iteration')
     plt.ion()
     plt.figure()
-    plt.plot(learn_loss)
+    plt.plot(train_loss)
     plt.ylabel("loss")
     plt.xlabel('epoch')
     plt.show()
@@ -38,19 +40,18 @@ def p5_4(ui):
         plt.axis('off')
         plt.show()
     else:
-        learn_loss = tr.train(num_epochs=50, sample_rate='epoch', save_model=True)
+        train_acc, train_loss = tr.train(num_epochs=50, sample_rate='epoch', save_model=True)
         plt.ion()
         f = plt.figure()
         f.add_subplot(2, 1, 1)
-        plt.plot([100-x for x in learn_loss])
+        plt.plot(train_acc)
         plt.title('Accuracy')
         plt.ylabel("%")
         
         f.add_subplot(2, 1, 2)
-        plt.plot(learn_loss)
+        plt.plot(train_loss)
         plt.ylabel('loss')
         plt.xlabel('epoch')
-        plt.axis('off')
         plt.show()
         plt.savefig(pretrained_png_path)
 

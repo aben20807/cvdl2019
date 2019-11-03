@@ -12,17 +12,30 @@ class Train(object):
         self.hyperparam = Hyperparam(
             batch_size=64,
             learning_rate=0.001,
-            optimizer=optim.SGD,
+            optimizer=optim.Adam,
             loss_fn=nn.CrossEntropyLoss,
             pretrained_model_path=os.getcwd() + \
                 os.sep + "problems" + \
                 os.sep + "model" + \
                 os.sep + "lenet_cifar10.pth")
-        self.dataset = Dataset(self.hyperparam.batch_size);
+        self.dataset = Dataset(self.hyperparam.batch_size)
+        self.epochs_size = len(self.dataset.trainloader)
+
+    def _calculate_accuracy(self, loader):
+        total = 0
+        correct = 0
+        with torch.no_grad():
+            for data in loader:
+                images, labels = data
+                outputs = self.net(images)
+                _, predicted = torch.max(outputs.data, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+        return 100 * correct / total 
 
     def train(self, num_epochs, sample_rate, save_model=False):
-        epochs_size = len(self.dataset.trainloader)
-        learn_loss = []
+        train_acc = []
+        training_loss = []
         print('Start Training')
         opt = self.hyperparam.optimizer(self.net.parameters(), lr=self.hyperparam.learning_rate)
         criterion = self.hyperparam.loss_fn()
@@ -44,15 +57,17 @@ class Train(object):
 
                 # print statistics
                 if sample_rate == 'iteration':
-                    learn_loss.append(loss.item())
+                    training_loss.append(loss.item())
                 running_loss += loss.item()
 
             if sample_rate == 'epoch':
-                learn_loss.append(running_loss/epochs_size)
-                print('[%d] loss: %.3f' %
-                  (epoch + 1, running_loss/epochs_size))
+                training_loss.append(running_loss/self.epochs_size)
+
+            train_accuracy = self._calculate_accuracy(self.dataset.trainloader)
+            print('[%d] loss: %.3f acc: %.3f' % (epoch+1, running_loss/self.epochs_size, train_accuracy))
+            train_acc.append(train_accuracy)
+        print('Finished Training')
+
         if save_model:
             torch.save(self.net.state_dict(), self.hyperparam.pretrained_model_path)
-
-        print('Finished Training')
-        return learn_loss
+        return train_acc, training_loss
