@@ -64,6 +64,7 @@ def p1_1(ui):
         drew_img = cv2.drawChessboardCorners(
             img, (chessboard_height,chessboard_width),
             find_ret['imgpoints'][idx], find_ret['patternWasFounds'][idx])
+        drew_img = cv2.resize(drew_img, (900,900))
         cv2.imshow(str(idx+1)+".bmp", drew_img)
 
 def p1_2(ui):
