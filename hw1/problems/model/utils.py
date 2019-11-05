@@ -17,7 +17,6 @@ class Utils(object):
     def show_10_images_and_images(dataset):
         # Get some random training images
         images, labels = iter(dataset.trainloader).next()
-        print(type(images))
 
         # Print labels
         print("Label: " + '\t'.join('%s' % dataset.classes[labels[i]] for i in range(10)))

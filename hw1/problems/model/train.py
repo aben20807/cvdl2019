@@ -11,7 +11,7 @@ class Train(object):
         self.net = net
         self.hyperparam = Hyperparam(
             batch_size=64,
-            learning_rate=0.001,
+            learning_rate=0.00088,
             optimizer=optim.Adam,
             loss_fn=nn.CrossEntropyLoss,
             pretrained_model_path=os.getcwd() + \
