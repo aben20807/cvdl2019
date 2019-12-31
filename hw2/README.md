@@ -16,6 +16,7 @@ $ source env/bin/activate
 
 ## Images
 
++ [Download link](https://drive.google.com/open?id=1hZnpuRcx0XDqfrz7OGk3nNQwbOcm37FC)
 + File location:
 
 ```bash
