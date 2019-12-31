@@ -14,7 +14,9 @@ class MainUi(QtWidgets.QMainWindow):
         super(MainUi, self).__init__()
         ui_path = os.getcwd() + os.sep + "ui" + os.sep + "hw2.ui"
         uic.loadUi(ui_path, self)
+        self.img_dir = os.getcwd() + os.sep + "images" + os.sep
         self._bind_buttons()
+        problem3.init(self)
 
         self.show()
 
