@@ -94,9 +94,13 @@ if __name__ == '__main__':
                 colors.append('b')
 
         # Save the top 5 result for each input
-        plt.figure(figsize=(10,8))
-        plt.ylim((0, 1))
-        plt.bar(pred_labels, pred_probas, color=colors)
-        plt.xlabel('classes')
-        plt.ylabel('probability')
-        plt.savefig(output_dir+"/ILSVRC2012_prob_{:0>8d}.png".format(i+1), bbox_inches='tight')
+        fig, ax = plt.subplots(figsize=(6,4))
+        ax.set_ylim(0, 1)
+        ax.bar(pred_labels, pred_probas, color=colors)
+        plt.draw()
+        for label in ax.get_xticklabels():
+            label.set_rotation(30)
+            label.set_ha('right')
+        ax.set_xlabel('classes')
+        ax.set_ylabel('probability')
+        ax.figure.savefig(output_dir+"/ILSVRC2012_prob_{:0>8d}.png".format(i+1), bbox_inches='tight')
