@@ -3,6 +3,7 @@
 ## Usage
 
 ```bash
+(env) $ mkdir output
 (env) $ python mobilenet_demo.py
 ```
 
@@ -16,6 +17,7 @@ $ source env/bin/activate
 
 ## Images
 
++ [Download link](https://drive.google.com/open?id=1yoVRVFOEiwl_YlNnmNiWxxyBVzdUWflM)
 + File location:
 
 ```bash
